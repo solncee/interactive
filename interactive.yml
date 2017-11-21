@@ -1,0 +1,16 @@
+---  #Interective module
+- hosts: all
+  connection: ssh
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  vars_prompt:
+    - name: Packages
+      prompt: What package would you like to install?
+      private: no
+
+  tasks:
+    - name: Install package
+      yum:
+        name: "{{Packages}}"
+        state: installed
